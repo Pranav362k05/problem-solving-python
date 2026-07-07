@@ -1,0 +1,180 @@
+`len()` and `range()` serve completely different purposes, though they're often used together in loops.
+
+## `len()`
+
+`len()` returns the **number of elements** in a collection.
+
+Example:
+
+```python
+arr = [10, 20, 30, 40]
+
+print(len(arr))
+```
+
+Output:
+
+```python
+4
+```
+
+Here, `len(arr)` tells you the list has **4 elements**.
+
+---
+
+## `range()`
+
+`range()` generates a sequence of numbers, usually for looping.
+
+Example:
+
+```python
+for i in range(4):
+    print(i)
+```
+
+Output:
+
+```python
+0
+1
+2
+3
+```
+
+Notice it starts at `0` and stops **before** `4`.
+
+---
+
+## Why do we often write `range(len(arr))`?
+
+Suppose you have:
+
+```python
+arr = [10, 20, 30, 40]
+```
+
+`len(arr)` gives:
+
+```python
+4
+```
+
+Then:
+
+```python
+range(len(arr))
+```
+
+becomes:
+
+```python
+range(4)
+```
+
+which produces:
+
+```python
+0, 1, 2, 3
+```
+
+These are exactly the **valid indices** of the list.
+
+So this loop:
+
+```python
+for i in range(len(arr)):
+    print(i, arr[i])
+```
+
+prints:
+
+```python
+0 10
+1 20
+2 30
+3 40
+```
+
+---
+
+## When to use each
+
+### Use `len()` when you need the size
+
+```python
+arr = [5, 8, 2]
+
+print(len(arr))
+```
+
+Output:
+
+```python
+3
+```
+
+---
+
+### Use `range()` when you need a sequence of numbers
+
+```python
+for i in range(5):
+    print(i)
+```
+
+Output:
+
+```python
+0
+1
+2
+3
+4
+```
+
+---
+
+### Use both together when you need the indices
+
+```python
+arr = ['a', 'b', 'c']
+
+for i in range(len(arr)):
+    print(i, arr[i])
+```
+
+Output:
+
+```python
+0 a
+1 b
+2 c
+```
+
+---
+
+## A more Pythonic way
+
+If you only need the values, don't use `range(len(...))`:
+
+```python
+for item in arr:
+    print(item)
+```
+
+If you need both the index and the value, use `enumerate()`:
+
+```python
+for i, item in enumerate(arr):
+    print(i, item)
+```
+
+This is generally preferred over:
+
+```python
+for i in range(len(arr)):
+    print(i, arr[i])
+```
+
+because it's more readable and idiomatic.
